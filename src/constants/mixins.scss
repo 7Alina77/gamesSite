@@ -1,0 +1,33 @@
+@import './constants.scss';
+
+@mixin font-settings-monserrat ($weight, $size) {
+  font-family: "Montserrat", sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  font-style: normal;
+}
+
+@mixin font-settings-source ($weight, $size) {
+  font-family: "Source Code Pro", monospace;
+  font-size: $size;
+  font-weight: $weight;
+  font-style: normal;
+}
+
+@mixin flexible ($justify) {
+  display: flex;
+  justify-content: $justify;
+  align-items: center;
+}
+
+@mixin link () {
+  color: $text-color;
+  text-decoration: none;
+  transition: .5s;
+}
+
+@mixin hover() {
+  cursor: pointer;
+  transform: scale(1.1);
+  // box-shadow: 2px 3px 34px rgba(222, 217, 217, 0.68);
+}
