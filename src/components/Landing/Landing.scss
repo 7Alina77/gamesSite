@@ -23,7 +23,7 @@
 
 .landing {
   height: calc(100vh - 70px);
-  width: 100%;
+  width: 100vw;
   background-image: url(../../images/background2.png);
   background-position: top;
   background-size: auto, auto;
@@ -42,7 +42,6 @@
   top: 0;
   bottom: 0;
   z-index: 8;
-  transition: 1s;
 }
 
 .content {
@@ -52,15 +51,27 @@
 }
 
 .landing-title {
+  @include font-settings-source(600, 45px);
   position: relative;
   z-index: 99;
-  margin: 0;
+  margin: 10% 0 0;
   padding: 0;
-  width: 740px;
+  width: 730px;
   color: $text-color;
-  font-size: 60px;
   white-space: nowrap;
   overflow: hidden;
-  border-right: 3px solid white; /* рисуем курсор */
+  border-right: 3px solid $text-color; /* рисуем курсор */
   animation: cursor .5s step-end infinite, printed_text 4s steps(30) infinite;
+}
+
+.landing-subtitle {
+  @include font-settings-source(400, 20px);
+  line-height: 1.4;
+  position: relative;
+  z-index: 99;
+  color: $text-color;
+  opacity: .8;
+  margin: 5% 0 0;
+  padding: 0;
+  width: 60%;
 }
