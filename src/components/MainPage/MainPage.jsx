@@ -4,6 +4,7 @@ import './MainPage.scss';
 
 
 function MainPage() {
+  
   return (
     <main className="main">
       <Header />

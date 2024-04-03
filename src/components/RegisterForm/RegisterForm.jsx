@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './RegisterForm.scss';
 import { useForm } from 'react-hook-form';
 
 function RegisterForm() {
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();
-  const password = React.useRef({});
+  const { register, handleSubmit, formState: { errors }, watch } = useForm({
+    defaultValues: {
+      name: null,
+      email: null,
+      password: null,
+      confirmPassword: null,
+    }
+  });
+  const password = useRef({});
   password.current = watch('password', '');
-  console.log(errors);
+
+  useEffect(() => {
+    const subscription = watch((data) => {
+      console.log(data);
+
+      return () => {
+        subscription.unsubscribe();
+      }
+    })
+  }, [watch]);
 
   const onSubmit = (data) => {
     console.log(data); // Здесь вы можете отправить данные на сервер или выполнить другие действия с ними
@@ -23,39 +39,44 @@ function RegisterForm() {
             type='text'
             id='name' 
             {...register('name', { required: true })}
-            />
-          {errors.name && <p className='error-message'>Поле 'Имя' обязательно для заполнения</p>}
+          />
+          <p className='error-message'>{errors.name ? "Поле 'Имя' обязательно для заполнения" : ''}</p>
         </div>
         <div className='form-group'>
           <label htmlFor='email'></label>
           <input className='form-input email-input' 
-            placeholder='Email'
+            placeholder='email@domain.com'
             type='email'
             id='email' 
             {...register('email', { required: true })}
           />
-          {errors.name && <p className='error-message'>Поле 'Email' обязательно</p>}
+          <p className='error-message'>{errors.email ? "Поле 'Email' обязательно для заполнения": ''}</p>
         </div>
         <div className='form-group'>
           <label htmlFor='password'></label>
           <input className='form-input name-password'
             placeholder='Password'
-            type='password'
+            type = 'password'
             id='password'
             {...register('password', { required: true, minLength: 6 })} 
-            />
-          {errors.password && errors.password.type === 'required' && <p className='error-message'>Поле 'Пароль' обязательно</p>}
-          {errors.password && errors.password.type === 'minLength' && <p className='error-message'>Минимальная длина пароля - 6 символов</p>}
+          />
+          <p className='error-message'>
+            {(errors.password && errors.password.type === 'required') && "Поле 'Пароль' обязательно для заполнения"}
+            {(errors.password && errors.password.type === 'minLength') && "Минимальная длина пароля - 6 символов"}
+          </p>
         </div>
         <div className='form-group'>
           <label htmlFor='confirmPassword'></label>
           <input className='form-input name-password-confirm'
             placeholder='Confirm password'
-            type='password'
+            type = 'password'
             id='confirmPassword'
             {...register('confirmPassword', { required: true, validate: value => value === password.current || 'Пароли не совпадают' })} 
-            />
-          {errors.confirmPassword && <p className='error-message'>{errors.confirmPassword.message}</p>}
+          />
+          <p className='error-message'>
+            {errors.confirmPassword && errors.confirmPassword.message}
+            {(errors.confirmPassword && errors.confirmPassword.type === 'required') && "Подтверждение пароля обязательно"}
+          </p>
         </div>
         <button className='button' type='submit'>Register</button>
       </form>

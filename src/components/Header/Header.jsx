@@ -1,8 +1,11 @@
 import './Header.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../../images/logo.jpg';
 
 function Header() {
+  const location = useLocation();
+  const path = location.pathname; 
+
   return (
     <section className='header'>
       <nav className='nav'>
@@ -10,8 +13,10 @@ function Header() {
           <img src={logo} alt='logo' className='logo-img' />
         </Link>
         <ul className='auth'>
-          <li className='auth-item'><Link to='/login' className='link'>Login</Link></li>
-          {/* <li className='auth-item'><Link to='/login'>Sign up</Link></li> */}
+          {path === '/' 
+          ?  <li className='auth-item'><Link to='/login' className='link'>Log in</Link></li>
+          :  <li className='auth-item'><Link to='/' className='link'>Register</Link></li>
+          }
         </ul>
       </nav>
     </section>

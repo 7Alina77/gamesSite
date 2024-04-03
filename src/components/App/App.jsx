@@ -11,7 +11,9 @@ function App() {
     <FormProvider {...methods}> 
     <div className="App">
       <Routes>
-        <Route path='/' element={<MainPage />} />
+        <Route path='/' element={<MainPage />}>
+          <Route path='login' element={<MainPage />} />
+        </Route>
       </Routes>
     </div>
     </FormProvider>

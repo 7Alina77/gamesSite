@@ -1,0 +1,46 @@
+@import '../../constants/constants.scss'; 
+@import '../../constants/mixins.scss';
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-input {
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 90%;
+  padding: 7px 10px;
+}
+
+.error-message {
+  @include font-settings-monserrat(400, 12px);
+  width: 90%;
+  height: 24px;
+  margin: 0;
+  padding: 3px 0;
+  line-height: 12px;
+  text-align: center;
+}
+
+.button {
+  @include font-settings-monserrat(400, 20px);
+  border-radius: 10px;
+  position: absolute;
+  width: 60%;
+  left: 0;
+  right: 0;
+  bottom: 15px;
+  margin: 0 auto;
+  padding: 10px 5px;
+  color: $text-color;
+  background-color: $first-color;
+  border: 3px solid $third-color;
+  transition: .5s;
+}
+
+.button:hover {
+  @include hover();
+}
